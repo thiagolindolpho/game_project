@@ -4,7 +4,6 @@ from shop import shop
 from maps import map_list
 from map_select import map_select
 from items import item_list
-from enemys import enemy_list
 from combat_start import combat_start
 from attack import attack
 from character_select import character_select
@@ -33,12 +32,13 @@ def main_menu():
 
 
         purchased_item = shop(gold_bag)
-
         ingame_hero_list = item_equip(purchased_item, ingame_hero_list)
 
         print(ingame_hero_list)
 
         map_selected = map_select()
 
-        combat_start(map_selected)
+        print(map_selected)
+
+        combat_start(map_selected, ingame_hero_list, 0)
 main_menu()

@@ -6,8 +6,7 @@ def attack(attacker, target):
         elif target["armor"] < attacker["damage"]:
             dmg = attacker["damage"] - target["armor"]
             print(f"{attacker["name"]} causou {dmg} de dano a {target["name"]}")
-            dmg_taken = target["health"] - dmg
-            return dmg_taken
+            return dmg
         else:
             print("ocorreu um erro inesperado")
             return 0
@@ -19,8 +18,7 @@ def attack(attacker, target):
         elif target["armor"] < attacker["damage"]:
             dmg = attacker["damage"] - target["magic_resistance"]
             print(f"{attacker["name"]} causou {dmg} de dano a {target["name"]}")
-            dmg_taken = target["health"] - dmg
-            return dmg_taken
+            return dmg
         else:
             print("ocorreu um erro inesperado")
             return 0
