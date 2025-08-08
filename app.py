@@ -39,6 +39,6 @@ def main_menu():
         map_selected = map_select()
 
         print(map_selected)
-        # qualquer coisa
+        
         combat_start(map_selected, ingame_hero_list, 0)
 main_menu()
