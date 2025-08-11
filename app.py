@@ -8,6 +8,7 @@ from combat_start import combat_start
 from attack import attack
 from character_select import character_select
 from item_equip import  item_equip
+from middleware import verify_quantity
 
 
 ingame_enemy_list = []
@@ -39,6 +40,7 @@ def main_menu():
         map_selected = map_select()
 
         print(map_selected)
-        
+
         combat_start(map_selected, ingame_hero_list, 0)
+
 main_menu()

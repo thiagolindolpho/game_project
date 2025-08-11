@@ -1,6 +1,7 @@
 from attack import attack
 from middleware import verify_quantity
 from enemys import enemy_list
+from update_life import update_life
 
 def combat_start(map, hero, index_monster):
 
@@ -13,10 +14,15 @@ def combat_start(map, hero, index_monster):
     if hero_team:
         while True:
             print('1 - attack\n')
-            hero_action = input(f"que ação deseja executar contra {enemy_list[index_monster]["name"]}?")
+            hero_action = input(f"que ação deseja executar contra {enemy_list[index_monster]["name"]}?\n")
+
             if hero_action == "1":
                 dmg = attack(hero[0], enemy_list[index_monster])
                 life_monster -= dmg
+
+                update_life(hero, 0, enemy_list, index_monster, life_monster)
+
+
 
             if life_monster <= 0:
                 encounters -= 1
