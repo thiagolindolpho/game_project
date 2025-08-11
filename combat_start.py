@@ -3,6 +3,7 @@ from middleware import verify_quantity
 from enemys import enemy_list
 from update_life import update_life
 
+
 def combat_start(map, hero, index_monster):
 
     print(f" - enemy: {enemy_list[index_monster]["name"]}")
@@ -11,26 +12,32 @@ def combat_start(map, hero, index_monster):
     encounters = map["encounters"]
     life_monster = enemy_list[index_monster]["health"]
 
+    dmg_hero = 0
+
+    print("Iniciando Combate")
+
     if hero_team:
         while True:
-            print('1 - attack\n')
-            hero_action = input(f"que ação deseja executar contra {enemy_list[index_monster]["name"]}?\n")
-
-            if hero_action == "1":
-                dmg = attack(hero[0], enemy_list[index_monster])
-                life_monster -= dmg
-
-                update_life(hero, 0, enemy_list, index_monster, life_monster)
-
-
-
-            if life_monster <= 0:
-                encounters -= 1
-                life_monster = enemy_list[index_monster]["health"]
-            
-            print("Encontros:", encounters)
             if encounters == 0:
                 break
+
+            print(f"Monster position: {encounters}, life {life_monster}")
+            print("1 - attack\n")
+            hero_action = input(
+                f"que ação deseja executar contra {enemy_list[index_monster]["name"]}?\n"
+            )
+            print(f"Encontros: {encounters}\n")
+
+            if life_monster - dmg_hero <= 0:
+                encounters -= 1
+                print("Monster has ben killed.\n")
+                life_monster = enemy_list[index_monster]["health"]
+                continue
+
+            if hero_action == "1":
+                dmg_hero = attack(hero[0], enemy_list[index_monster])
+                life_monster -= dmg_hero
+                print(f"Monster Life on attack:, {life_monster}")
 
             # print(f"vez de {enemy["name"]}")
             # dmg = attack(enemy, hero_team)
