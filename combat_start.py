@@ -12,7 +12,9 @@ def combat_start(map, hero, index_monster):
     encounters = map["encounters"]
     life_monster = enemy_list[index_monster]["health"]
 
+
     dmg_hero = 0
+    monster_dmg = 0
 
     print("Iniciando Combate")
 
@@ -21,6 +23,7 @@ def combat_start(map, hero, index_monster):
             if encounters == 0:
                 break
 
+            print(f"--turno de {hero[0]["name"]}--")
             print(f"Monster position: {encounters}, life {life_monster}")
             print("1 - attack\n")
             hero_action = input(
@@ -38,6 +41,18 @@ def combat_start(map, hero, index_monster):
                 dmg_hero = attack(hero[0], enemy_list[index_monster])
                 life_monster -= dmg_hero
                 print(f"Monster Life on attack:, {life_monster}")
+
+            print(f" --turno de {enemy_list[index_monster]["name"]}--")
+
+            if hero[0]["health"] - enemy_list[index_monster]["damage"] <= 0:
+                print(f"{enemy_list[index_monster]["name"]} ganhou o combate!")
+
+            monster_dmg = attack(enemy_list[index_monster], hero[0])
+            hero[0]["health"] -= monster_dmg
+            print(f"hero Life on attack:, {hero[0]["health"]}")
+
+
+
 
             # print(f"vez de {enemy["name"]}")
             # dmg = attack(enemy, hero_team)

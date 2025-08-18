@@ -5,7 +5,7 @@ hero_list = [
         "damage_type": "physical",
         "damage": 60,
         "health": 1200,
-        "armor": 60,
+        "armor": 0, #60
         "magic_resistance": 5,
         "health_regen": 25,
         "backpack": [],
