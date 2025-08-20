@@ -1,7 +1,7 @@
 from attack import attack
 from middleware import verify_quantity
 from enemys import enemy_list
-from update_life import update_life
+from reward import reward
 
 
 def combat_start(map, hero, index_monster):
@@ -21,7 +21,7 @@ def combat_start(map, hero, index_monster):
     if hero_team:
         while True:
             if encounters == 0:
-                break
+                return reward(map)
 
             print(f"--turno de {hero[0]["name"]}--")
             print(f"Monster position: {encounters}, life {life_monster}")

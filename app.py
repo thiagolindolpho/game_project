@@ -10,11 +10,8 @@ from character_select import character_select
 from item_equip import  item_equip
 from middleware import verify_quantity
 
-
-ingame_enemy_list = []
-gold_bag = 50
-
 def main_menu():
+    gold_bag = 50
     while True:
         print("   --MAIN MENU--\n")
         print(" - type 1 for: start new game\n"
@@ -33,6 +30,7 @@ def main_menu():
 
 
         purchased_item = shop(gold_bag)
+        gold_bag -= purchased_item["price"]
         ingame_hero_list = item_equip(purchased_item, ingame_hero_list)
 
         print(ingame_hero_list)
@@ -41,6 +39,13 @@ def main_menu():
 
         print(map_selected)
 
-        combat_start(map_selected, ingame_hero_list, 0)
+        gold_bag += combat_start(map_selected, ingame_hero_list, 0)
+
+        print(gold_bag)
+
+        purchased_item = shop(gold_bag)
+        gold_bag -= purchased_item
+
+        return None
 
 main_menu()
