@@ -30,15 +30,16 @@ def main_menu():
         else:
             print("erro inesperado,\ntenha certeza que o comando que digitou existe\n")
 
-
-        purchased_item = shop(gold_bag)
-        gold_bag -= purchased_item["price"]
-        ingame_hero_list = item_equip(purchased_item, ingame_hero_list)
-        ingame_hero_list = update_hero(ingame_hero_list)
-        print(ingame_hero_list)
-        map_selected = map_select()
-        print(map_selected)
-        gold_bag += combat_start(map_selected, ingame_hero_list, 0)
+        for i in range(0, 4):
+            purchased_item = shop(gold_bag)
+            gold_bag -= purchased_item["price"]
+            ingame_hero_list = item_equip(purchased_item, ingame_hero_list)
+            ingame_hero_list = update_hero(ingame_hero_list)
+            print(ingame_hero_list)
+            map_selected = map_select()
+            print(map_selected)
+            gold_bag += combat_start(map_selected, ingame_hero_list, i)
+            i += 1
 
 
         #print(ingame_hero_list)
