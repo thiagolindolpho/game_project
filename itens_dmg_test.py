@@ -1,4 +1,9 @@
+import pandas as pd
+
 from items import item_list
+
+items_save = pd.DataFrame(item_list)
+items_save.to_csv("save_game")
 
 total_bonus_dmg = 0
 
