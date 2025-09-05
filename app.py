@@ -11,6 +11,7 @@ from item_equip import  item_equip
 from middleware import verify_quantity
 from update_hero import update_hero
 import pandas as pd
+from save_game import save_game
 
 def main_menu():
     gold_bag = 1000
@@ -26,15 +27,41 @@ def main_menu():
             ingame_hero_list = character_select()
             print(ingame_hero_list)
         elif command == "2":
+            saved_heros_list = []
+            saved_games_csv = pd.read_csv("saved_games")
+            for index, row in saved_games_csv.iterrows():
+                print(f"{index} - {row["name"]}")
+                saved_heros_list.append(
+                    {"name": row["name"],
+                     "class": row["class"],
+                     "damage_type": row["damage_type"],
+                     "damage": row["damage"],
+                     "health": row["health"],
+                     "armor": row["armor"],
+                     "magic_resistance": row["magic_resistance"],
+                     "health_regen": row["health_regen"],
+                     "backpack": [],
+                     "level": row["level"]}
+                )
 
+            command = int(input("qual jogo deseja carregar?: "))
 
-            saved_games = pd.read_csv("save_game")
-            saved_games_dict = saved_games.to_dict(orient= "records")
-            for row in saved_games_dict:
-                print(row)
+            ingame_hero_list = saved_heros_list[command]
 
-            game_index = input("digite o indice do jogo que quer carregar: ")
+            for i in range(0, 5):
+                purchased_item = shop(gold_bag)
+                gold_bag -= purchased_item["price"]
+                ingame_hero_list = item_equip(purchased_item, ingame_hero_list)
+                ingame_hero_list = update_hero(ingame_hero_list)
+                save_hero = ingame_hero_list[0]
+                save_game(save_hero)
+                print(ingame_hero_list)
+                map_selected = map_select()
+                print(map_selected)
+                gold_bag += combat_start(map_selected, ingame_hero_list, i)
+                i += 1
 
+            return None
 
         elif command == "3":
             print("exit")
@@ -47,17 +74,14 @@ def main_menu():
             gold_bag -= purchased_item["price"]
             ingame_hero_list = item_equip(purchased_item, ingame_hero_list)
             ingame_hero_list = update_hero(ingame_hero_list)
+            save_hero = ingame_hero_list[0]
+            save_game(save_hero)
             print(ingame_hero_list)
             map_selected = map_select()
             print(map_selected)
             gold_bag += combat_start(map_selected, ingame_hero_list, i)
             i += 1
-            game_saved = {
-                "ingame_heros": ingame_hero_list,
-                "gold": gold_bag
-            }
-            saved_game_data = pd.DataFrame(game_saved)
-            saved_game_data.to_csv("save_game")
+
 
         return None
 

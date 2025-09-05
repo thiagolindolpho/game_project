@@ -1,0 +1,4 @@
+,name,class,damage_type,damage,health,armor,magic_resistance,health_regen,level
+0,magnus,tank,physical,70,1200,0,5,25,1
+1,neruel,mage,magic,180,500,5,40,2,1
+2,erin,bruiser,physical,140,800,45,5,5,1
